@@ -28,6 +28,7 @@ The Application provides the following endpoints -
 POST     api/cafe: Create new cafe
 PUT      api/cafe: Update an existing cafe
 GET      api/cafe: Retrieve a list of cafe
+GET      api/cafe/{cafeId}: Retrieve a list of employess of a specific cafe
 DELETE   api/cafe: Delete an existing cafe
 
 POST     api/employee: Create new employee
