@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f5f7;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.ant-layout-header {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.ant-layout-content {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ant-layout-footer {
+    background-color: #001529;
+    color: white;
+    font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+    color: #2c3e50;
+}
+
+p {
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.ant-btn-primary {
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.ant-btn-primary:hover {
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+}
+
+.app-layout {
+    min-height: 100vh;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 0 16px;
+    border-bottom: 1px solid #d9d9d9;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.home-button {
+    margin-right: 16px;
+}
+
+/* Menu */
+.app-menu {
+    flex: 0;
+    margin-right: auto;
+    background: none;
+    border: none;
+}
+
+.app-menu .ant-menu-item {
+    min-width: auto;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+.app-title {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #001529;
+}
+
+.app-content {
+    margin: 16px;
+    background: #f0f2f5;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.app-footer {
+    text-align: center;
+    background-color: #001529;
+    color: white;
+    padding: 12px 0;
+}
