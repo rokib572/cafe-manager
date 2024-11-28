@@ -59,7 +59,10 @@ Frontend Developed using
 
 ### Install dependencies
 
-`npm i`
+```
+cd src/Frontend/cafe-manager
+npm i
+```
 
 ### Start the development server
 
