@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Space, Popconfirm, message, Modal, Form, Input, Radio, Select } from 'antd';
+import { Button, Space, message, Modal, Form, Input, Radio, Select, Popconfirm } from 'antd';
 import { useAppDispatch } from '../../utils/hooks';
 import { removeEmployee, editEmployee, loadEmployees } from '../../redux/employeesSlice';
 import { fetchCafes } from '../../api/cafes';
+import { AgGridReact } from 'ag-grid-react';
+import { ColDef } from 'ag-grid-community';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 const { Option } = Select;
 
@@ -91,24 +95,23 @@ const EmployeeTable = ({ employees }: { employees: Employee[] }) => {
         setIsDirty(true);
     };
 
-    const columns = [
-        { title: 'Employee ID', dataIndex: 'id', key: 'id' },
-        { title: 'Name', dataIndex: 'name', key: 'name' },
-        { title: 'Email', dataIndex: 'emailAddress', key: 'email' },
-        { title: 'Phone', dataIndex: 'phoneNumber', key: 'phone' },
-        { title: 'Days Worked', dataIndex: 'daysWorked', key: 'daysWorked' },
-        { title: 'Café Name', dataIndex: 'cafe', key: 'cafeName' },
+    const columnDefs: ColDef<Employee>[] = [
+        { headerName: 'Employee ID', field: 'id', sortable: true, filter: true },
+        { headerName: 'Name', field: 'name', sortable: true, filter: true, flex: 1 },
+        { headerName: 'Email', field: 'emailAddress', sortable: true, filter: true, flex: 1 },
+        { headerName: 'Phone', field: 'phoneNumber', flex: 1 },
+        { headerName: 'Days Worked', field: 'daysWorked', flex: 1 },
+        { headerName: 'Café Name', field: 'cafe', flex: 1 },
         {
-            title: 'Actions',
-            key: 'actions',
-            render: (_: any, record: Employee) => (
+            headerName: 'Actions',
+            cellRenderer: (params: any) => (
                 <Space>
-                    <Button type="link" onClick={() => handleEdit(record)}>
+                    <Button type="link" onClick={() => handleEdit(params.data)}>
                         Edit
                     </Button>
                     <Popconfirm
                         title="Are you sure you want to delete this employee?"
-                        onConfirm={() => handleDelete(record.id)}
+                        onConfirm={() => handleDelete(params.data.id)}
                         okText="Yes"
                         cancelText="No"
                     >
@@ -123,7 +126,16 @@ const EmployeeTable = ({ employees }: { employees: Employee[] }) => {
 
     return (
         <React.Fragment>
-            <Table dataSource={employees} columns={columns} rowKey="id" pagination={{ pageSize: 10 }} />
+            <div className="ag-theme-alpine" style={{ height: 500, width: '100%' }}>
+                <AgGridReact<Employee>
+                    rowData={employees}
+                    columnDefs={columnDefs}
+                    domLayout="autoHeight"
+                    pagination={true}
+                    paginationPageSize={10}
+                    getRowId={(params) => params.data.id} // Use Employee ID as a unique identifier
+                />
+            </div>
 
             <Modal
                 title="Edit Employee"
@@ -131,8 +143,17 @@ const EmployeeTable = ({ employees }: { employees: Employee[] }) => {
                 onCancel={handleCancel}
                 onOk={() => form.submit()}
             >
-                <Form form={form} layout="vertical" onFinish={handleEditSubmit} onValuesChange={handleValuesChange}>
-                    <Form.Item label="Name" name="name" rules={[{ required: true, min: 6, max: 10 }]}>
+                <Form
+                    form={form}
+                    layout="vertical"
+                    onFinish={handleEditSubmit}
+                    onValuesChange={handleValuesChange}
+                >
+                    <Form.Item
+                        label="Name"
+                        name="name"
+                        rules={[{ required: true, min: 6, max: 10 }]}
+                    >
                         <Input />
                     </Form.Item>
                     <Form.Item
@@ -145,7 +166,13 @@ const EmployeeTable = ({ employees }: { employees: Employee[] }) => {
                     <Form.Item
                         label="Phone"
                         name="phoneNumber"
-                        rules={[{ required: true, pattern: /^[89]\d{7}$/, message: 'Invalid phone number' }]}
+                        rules={[
+                            {
+                                required: true,
+                                pattern: /^[89]\d{7}$/,
+                                message: 'Invalid phone number',
+                            },
+                        ]}
                     >
                         <Input />
                     </Form.Item>

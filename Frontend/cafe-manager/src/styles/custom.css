@@ -55,6 +55,11 @@ p {
     border-color: #40a9ff;
 }
 
+.ag-theme-alpine {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .app-layout {
     min-height: 100vh;
 }

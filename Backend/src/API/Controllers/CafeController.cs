@@ -39,5 +39,13 @@ namespace API.Controllers
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}
+
+		[HttpGet("{cafeId}")]
+		public async Task<IActionResult> GetCafeEmployees(string cafeId)
+		{
+			var query = new GetCafeEmployees { CafeId= cafeId };
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
 	}
 }

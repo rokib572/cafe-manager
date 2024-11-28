@@ -6,6 +6,7 @@ import AddEditCafeForm from '../components/cafe/AddEditCafeForm';
 import AddEditEmployeeForm from '../components/employee/AddEditEmployeeForm';
 import HomePage from '../pages/HomePage';
 import AppLayout from '../layout/AppLayout';
+import CafeEmployeePage from '../pages/CafeEmployeePage';
 
 const AppRoutes: React.FC = () => {
     return (
@@ -16,6 +17,7 @@ const AppRoutes: React.FC = () => {
                 <Route path="/cafes" element={<CafePage />} />
                 <Route path="/cafes/add" element={<AddEditCafeForm />} />
                 <Route path="/cafes/edit/:id" element={<AddEditCafeForm />} />
+                <Route path="/cafes/:id/employees" element={<CafeEmployeePage />} />
 
                 <Route path="/employees" element={<EmployeePage />} />
                 <Route path="/employees/add" element={<AddEditEmployeeForm />} />

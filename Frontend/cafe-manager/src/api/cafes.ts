@@ -29,3 +29,8 @@ export const updateCafe = async (cafeData: {
 export const deleteCafe = async (id: string) => {
     return axios.delete(`${API_BASE}/${id}`);
 };
+
+export const getEmployeesByCafe = async (cafeId: string) => {
+    const response = await axios.get(`${API_BASE}/${cafeId}`);
+    return response.data;
+};

@@ -7,6 +7,7 @@ interface Cafe {
     description: string;
     logo: string | null;
     location: string;
+    employees: number;
 }
 
 interface CafesState {
